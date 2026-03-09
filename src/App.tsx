@@ -21,7 +21,7 @@ import {
   Watch,
   Headphones,
   Camera,
-  ChevronRight,
+  Tag,
   ArrowRight
 } from 'lucide-react';
 
@@ -70,14 +70,13 @@ export default function App() {
 
   // --- COMPOSANTS REUTILISABLES ---
   
-  // Carte Produit Style Back Market
   const ProductCard = ({ title, desc, price, oldPrice, imgUrl, rating, isSeniorFriendly = false }: any) => (
     <div 
       className="bg-white rounded-xl shadow-sm hover:shadow-lg border border-slate-200 transition-all cursor-pointer flex flex-col group p-4 relative h-full"
       onClick={() => navigate('product')}
     >
       <div className="absolute top-4 left-4 z-10 flex flex-col gap-2">
-        <span className="bg-[#ccff00] text-black text-xs font-bold px-2 py-1 rounded-sm">
+        <span className="bg-[#ccff00] text-black text-xs font-bold px-2 py-1 rounded-sm w-max">
           RECONDITIONNÉ PARFAIT ÉTAT
         </span>
         {isSeniorFriendly && serenityMode && (
@@ -87,7 +86,7 @@ export default function App() {
         )}
       </div>
       
-      <div className="h-48 flex items-center justify-center mb-4 mt-6">
+      <div className="h-48 flex items-center justify-center mb-4 mt-8">
         <img src={imgUrl} alt={title} className="h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform" />
       </div>
       
@@ -116,7 +115,6 @@ export default function App() {
   // --- HEADER ---
   const Header = () => (
     <header className="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm">
-      {/* Top Banner */}
       <div className="bg-slate-100 text-xs text-center py-1 text-slate-600 hidden sm:block">
         Livraison standard offerte • Retour gratuit sous 30 jours • Garantie 12 mois minimum
       </div>
@@ -156,7 +154,6 @@ export default function App() {
         </div>
       </div>
       
-      {/* Navigation secondaire */}
       <div className="border-t border-slate-100 hidden md:block">
         <div className="max-w-7xl mx-auto px-4 h-12 flex items-center gap-8 overflow-x-auto text-sm font-bold text-slate-700">
           <button className="hover:text-black whitespace-nowrap">Bons plans</button>
@@ -192,14 +189,12 @@ export default function App() {
             </button>
           </div>
           <div className="flex-1 w-full h-[400px] md:h-[500px] relative">
-            {/* Image de seniors satisfaits */}
             <img 
               src="https://images.unsplash.com/photo-1573656113824-3f19114b03cc?w=800&q=80" 
               alt="Seniors utilisant un smartphone" 
               className="absolute inset-0 w-full h-full object-cover opacity-80"
               style={{ objectPosition: 'center 20%' }}
             />
-            {/* Dégradé pour la transition texte/image sur mobile */}
             <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-l from-transparent to-[#1D1D1B] opacity-80 md:opacity-100 w-full md:w-1/3"></div>
           </div>
         </div>
@@ -220,35 +215,38 @@ export default function App() {
         </div>
       </section>
 
-      {/* 3. CATEGORIES GRID (Lime Green) */}
+      {/* 3. CATEGORIES GRID */}
       <section className="max-w-7xl mx-auto px-4 py-16">
-        <h3 className="text-2xl font-black mb-6">Nos meilleures catégories</h3>
+        <h3 className="text-2xl font-black mb-6">Nos meilleures ventes</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
-            { name: "Smartphones", icon: Smartphone, img: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=200&q=80" },
-            { name: "Tablettes", icon: Tablet, img: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=200&q=80" },
-            { name: "Ordinateurs", icon: Laptop, img: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=200&q=80" },
-            { name: "Montres", icon: Watch, img: "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=200&q=80" },
-            { name: "Audio", icon: Headphones, img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=200&q=80" },
-            { name: "Séniors", icon: CheckCircle2, img: "https://images.unsplash.com/photo-1512428559087-560fa5ceab42?w=200&q=80" },
-            { name: "Photo", icon: Camera, img: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=200&q=80" },
-            { name: "Bons plans", icon: Tag, img: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=200&q=80" },
-          ].map((cat, idx) => (
-            <button 
-              key={idx} 
-              onClick={() => navigate('product')}
-              className="bg-[#ccff00] hover:bg-[#bbf000] p-6 rounded-2xl flex flex-col items-center justify-center gap-4 transition-colors group h-40"
-            >
-              <div className="w-16 h-16 bg-white rounded-full p-3 shadow-sm group-hover:scale-110 transition-transform flex items-center justify-center overflow-hidden">
-                <cat.icon className="w-8 h-8 text-black" />
-              </div>
-              <span className="font-bold text-black">{cat.name}</span>
-            </button>
-          ))}
+            { name: "Smartphones", icon: Smartphone },
+            { name: "Tablettes", icon: Tablet },
+            { name: "Ordinateurs", icon: Laptop },
+            { name: "Montres", icon: Watch },
+            { name: "Audio", icon: Headphones },
+            { name: "Séniors", icon: CheckCircle2 },
+            { name: "Photo", icon: Camera },
+            { name: "Bons plans", icon: Tag },
+          ].map((cat, idx) => {
+            const Icon = cat.icon; // Securisation du composant Icon
+            return (
+              <button 
+                key={idx} 
+                onClick={() => navigate('product')}
+                className="bg-[#ccff00] hover:bg-[#bbf000] p-6 rounded-2xl flex flex-col items-center justify-center gap-4 transition-colors group h-40"
+              >
+                <div className="w-16 h-16 bg-white rounded-full p-3 shadow-sm group-hover:scale-110 transition-transform flex items-center justify-center overflow-hidden">
+                  <Icon className="w-8 h-8 text-black" />
+                </div>
+                <span className="font-bold text-black">{cat.name}</span>
+              </button>
+            );
+          })}
         </div>
       </section>
 
-      {/* 4. SPLIT SECTION (Image + Products) */}
+      {/* 4. SPLIT SECTION */}
       <section className="max-w-7xl mx-auto px-4 py-8">
         <h3 className="text-2xl font-black mb-6">Des écrans larges, parfaits pour lire</h3>
         <div className="flex flex-col lg:flex-row gap-6">
@@ -258,7 +256,7 @@ export default function App() {
           <div className="lg:w-2/3">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 h-full">
               <ProductCard 
-                title="iPad (2021) 10.2\" 
+                title="iPad (2021) 10.2 pouces" 
                 desc="64 Go - Gris Sidéral - Wi-Fi" 
                 price="289" oldPrice="389" rating="4.7" isSeniorFriendly={true}
                 imgUrl="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=300&q=80"
@@ -280,7 +278,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* 5. PRODUCT GRID ("Titrez à vue") */}
+      {/* 5. PRODUCT GRID */}
       <section className="max-w-7xl mx-auto px-4 py-16">
         <div className="flex items-center justify-between mb-6">
           <h3 className="text-2xl font-black">Nos smartphones les plus simples d'utilisation</h3>
@@ -367,7 +365,7 @@ export default function App() {
     </div>
   );
 
-  // --- PRODUCT SCREEN (Simplifié pour correspondre) ---
+  // --- PRODUCT SCREEN ---
   const ProductScreen = () => (
     <div className="min-h-screen bg-white pb-24">
       <div className="max-w-6xl mx-auto px-4 py-8">
@@ -419,7 +417,7 @@ export default function App() {
               <p className="text-sm text-slate-500 line-through mb-1">Prix du neuf: 749 €</p>
               <div className="text-5xl font-black mb-4">429 €</div>
               <p className="text-sm font-bold flex items-center gap-2 mb-6">
-                <CheckCircle2 className="w-4 h-4 text-green-600" /> Livraison gratuite d'ici le {new Date(Date.now() + 172800000).toLocaleDateString('fr-FR')}
+                <CheckCircle2 className="w-4 h-4 text-green-600" /> Livraison gratuite d'ici demain
               </p>
               <button onClick={handleAddToCart} className="w-full bg-black text-white text-lg font-bold py-4 rounded-full hover:bg-slate-800 transition-colors">
                 Ajouter au panier
@@ -429,7 +427,7 @@ export default function App() {
             <div className="flex flex-col gap-4">
                <div className="flex items-center gap-3 p-4 border border-slate-200 rounded-xl">
                  <ShieldCheck className="w-6 h-6 text-black" />
-                 <div><span className="font-bold block">Garantie 12 mois</span><span className="text-sm text-slate-600">En cas de panne, on répare ou on remplace.</span></div>
+                 <div><span className="font-bold block">Garantie 12 mois minimum</span><span className="text-sm text-slate-600">En cas de panne, on répare ou on remplace.</span></div>
                </div>
                {serenityMode && (
                  <a href={`tel:${demoPhoneNumber}`} className="flex items-center gap-3 p-4 border border-blue-200 bg-blue-50 rounded-xl cursor-pointer hover:bg-blue-100">
@@ -444,7 +442,7 @@ export default function App() {
     </div>
   );
 
-  // --- ASSISTANCE SCREEN (Conservé et adapté au style) ---
+  // --- ASSISTANCE SCREEN ---
   const AssistanceScreen = () => (
     <div className="min-h-screen bg-slate-50 pb-24">
       <div className="max-w-4xl mx-auto px-4 py-12">
@@ -524,7 +522,7 @@ export default function App() {
     );
   };
 
-  // --- FOOTER (Blanc comme sur l'image) ---
+  // --- FOOTER ---
   const Footer = () => (
     <footer className="bg-white border-t border-slate-200 pt-16 pb-8 px-4 text-sm text-slate-600">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">

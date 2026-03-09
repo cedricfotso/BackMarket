@@ -191,7 +191,7 @@ export default function App() {
           </div>
           <div className="flex-1 w-full h-[400px] md:h-[500px] relative">
             <img 
-              src="https://images.unsplash.com/photo-1573656113824-3f19114b03cc?w=800&q=80" 
+              src="/Image_fx (19).png"
               alt="Seniors utilisant un smartphone" 
               className="absolute inset-0 w-full h-full object-cover opacity-80"
               style={{ objectPosition: 'center 20%' }}

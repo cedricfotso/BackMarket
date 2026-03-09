@@ -343,29 +343,58 @@ export default function App() {
         </div>
       </section>
 
-      {/* 8. EXPERTS / TUTORIALS SECTION */}
+      {/* SECTION VIDÉOS DE RÉASSURANCE */}
       <section className="max-w-7xl mx-auto px-4 py-16">
-        <div className="flex items-center justify-between mb-8">
-          <h3 className="text-2xl font-black">Nos experts vous accompagnent</h3>
-          <button onClick={() => navigate('assistance')} className="text-sm font-bold underline hidden sm:block">Voir toutes nos aides</button>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {[
-            { title: "Comment passer son premier appel en visio ?", img: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&q=80" },
-            { title: "Agrandir le texte sur son écran", img: "https://images.unsplash.com/photo-1512428559087-560fa5ceab42?w=500&q=80" },
-            { title: "Quel téléphone simple choisir ?", img: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=500&q=80" }
-          ].map((video, idx) => (
-            <div key={idx} className="group cursor-pointer rounded-2xl overflow-hidden bg-[#2A0054] relative aspect-[4/5] flex flex-col justify-end p-6 hover:shadow-xl transition-all" onClick={() => navigate('assistance')}>
-              <img src={video.img} alt={video.title} className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-500" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#2A0054] via-transparent to-transparent opacity-90"></div>
-              <div className="relative z-10">
-                <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-4">
-                  <PlayCircle className="w-6 h-6 text-[#2A0054]" />
-                </div>
-                <h4 className="text-2xl font-black text-white leading-tight">{video.title}</h4>
-              </div>
+        <h3 className="text-3xl font-black mb-8 text-center text-[#2A0054]">
+          Achetez en toute sérénité : découvrez nos engagements
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          
+          {/* Vidéo 3 (Achat sans stress) */}
+          <div className="rounded-2xl overflow-hidden shadow-lg border border-slate-200 bg-white flex flex-col">
+            <video 
+              src="/video3.mp4" 
+              controls 
+              className="w-full aspect-video object-cover bg-black"
+            ></video>
+            <div className="p-6 flex-1">
+              <h4 className="font-bold text-xl text-slate-900">Acheter en ligne sans stress</h4>
+              <p className="text-slate-600 mt-2 leading-relaxed">
+                Acheter sur internet peut faire peur. Rassurez-vous, ici tout est testé, contrôlé et garanti.
+              </p>
             </div>
-          ))}
+          </div>
+
+          {/* Vidéo 1 (Qu'est-ce que Back Market) */}
+          <div className="rounded-2xl overflow-hidden shadow-lg border border-slate-200 bg-white flex flex-col">
+            <video 
+              src="/video1.mp4" 
+              controls 
+              className="w-full aspect-video object-cover bg-black"
+            ></video>
+            <div className="p-6 flex-1">
+              <h4 className="font-bold text-xl text-slate-900">Le concept Back Market</h4>
+              <p className="text-slate-600 mt-2 leading-relaxed">
+                Bien plus qu'un simple achat : nous participons activement à votre satisfaction et à votre bonheur au quotidien.
+              </p>
+            </div>
+          </div>
+
+          {/* Vidéo 2 (Garanties) */}
+          <div className="rounded-2xl overflow-hidden shadow-lg border border-slate-200 bg-white flex flex-col">
+            <video 
+              src="/video2.mp4" 
+              controls 
+              className="w-full aspect-video object-cover bg-black"
+            ></video>
+            <div className="p-6 flex-1">
+              <h4 className="font-bold text-xl text-slate-900">Nos garanties en détail</h4>
+              <p className="text-slate-600 mt-2 leading-relaxed">
+                Profitez de 12 mois de garantie, de retours simplifiés et de vendeurs rigoureusement certifiés.
+              </p>
+            </div>
+          </div>
+
         </div>
       </section>
 

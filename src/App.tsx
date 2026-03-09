@@ -171,8 +171,7 @@ export default function App() {
   const HomeScreen = () => (
     <div className="min-h-screen bg-white pb-12">
       
-      {/* 1. HERO BANNER */}
-      <section className="bg-[#1D1D1B] text-white">
+<section className="bg-[#1D1D1B] text-white">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center">
           <div className="p-8 md:p-16 flex-1 z-10">
             <div className="flex items-center gap-2 mb-4">
@@ -188,15 +187,17 @@ export default function App() {
             <button onClick={() => navigate('product')} className="bg-white text-black font-bold py-4 px-8 rounded-full hover:bg-slate-200 transition-colors text-lg">
               En profiter
             </button>
+          </div>
           <div className="flex-1 w-full h-[400px] md:h-[500px] relative">
             <img 
-              src="/image-accueil.png"
+              src="/image-accueil.png" 
               alt="Seniors utilisant un smartphone" 
               className="absolute inset-0 w-full h-full object-cover opacity-80"
               style={{ objectPosition: 'center 20%' }}
             />
             <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-l from-transparent to-[#1D1D1B] opacity-80 md:opacity-100 w-full md:w-1/3"></div>
           </div>
+        </div>
 
       {/* 2. REASSURANCE */}
       <section className="border-b border-slate-200 py-12 px-4">

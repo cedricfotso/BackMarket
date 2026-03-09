@@ -189,9 +189,9 @@ export default function App() {
               En profiter
             </button>
           </div>
-          <div className="flex-1 w-full h-[400px] md:h-[500px] relative">
+<div className="flex-1 w-full h-[400px] md:h-[500px] relative">
             <img 
-              src="/Image_fx (19).png"
+              src="/image-accueil.png"
               alt="Seniors utilisant un smartphone" 
               className="absolute inset-0 w-full h-full object-cover opacity-80"
               style={{ objectPosition: 'center 20%' }}
@@ -199,7 +199,6 @@ export default function App() {
             <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-l from-transparent to-[#1D1D1B] opacity-80 md:opacity-100 w-full md:w-1/3"></div>
           </div>
         </div>
-      </section>
 
       {/* 2. REASSURANCE */}
       <section className="border-b border-slate-200 py-12 px-4">

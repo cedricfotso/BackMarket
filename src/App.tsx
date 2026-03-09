@@ -39,8 +39,9 @@ export default function App() {
   const [cartCount, setCartCount] = useState(0);
   const [showCartToast, setShowCartToast] = useState(false);
 
-  // Numéro pour la démo
-  const demoPhoneNumber = "+237600000000";
+  // Numéro pour la démo bien visible pour les seniors
+  const demoPhoneNumber = "+33 7 54 14 28 93";
+  const telLink = "+33754142893"; // Format sans espaces pour que le lien clique bien sur mobile
 
   const navigate = (screen: Screen) => {
     setCurrentScreen(screen);
@@ -120,7 +121,7 @@ export default function App() {
       </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-<div className="flex items-center cursor-pointer" onClick={() => navigate('home')}>
+        <div className="flex items-center cursor-pointer" onClick={() => navigate('home')}>
           <img 
             src="https://front-office.statics.backmarket.com/3cad7f4e6c072b699e232744664711a51254c21a/img/header/Logo.svg" 
             alt="Back Market" 
@@ -139,11 +140,18 @@ export default function App() {
           </div>
         </div>
 
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4 sm:gap-6">
+          {/* Nouveau : Le numéro de téléphone affiché directement dans le Header */}
+          <a href={`tel:${telLink}`} className="hidden md:flex items-center gap-2 bg-[#ccff00] px-4 py-2 rounded-full text-black hover:bg-[#bbf000] transition-colors shadow-sm">
+            <Phone className="w-4 h-4" />
+            <span className="text-sm font-bold">{demoPhoneNumber}</span>
+          </a>
+
           <button onClick={() => navigate('assistance')} className="flex items-center gap-2 text-slate-700 hover:text-black transition-colors">
             <HelpCircle className="w-6 h-6" />
             <span className="text-sm font-bold hidden lg:block">Besoin d'aide ?</span>
           </button>
+          
           <button className="flex items-center gap-2 text-slate-700 hover:text-black transition-colors relative">
             <ShoppingCart className="w-6 h-6" />
             {cartCount > 0 && (
@@ -171,10 +179,8 @@ export default function App() {
   const HomeScreen = () => (
     <div className="min-h-screen bg-white pb-12">
       
-{/* 1. HERO BANNER (Version Plein Écran Correct) */}
+      {/* 1. HERO BANNER */}
       <section className="relative bg-[#1D1D1B] text-white min-h-[500px] md:min-h-[600px] flex items-center overflow-hidden">
-        
-        {/* L'image d'arrière-plan qui couvre TOUT */}
         <div className="absolute inset-0 z-0">
           <img 
             src="/image-accueil.png" 
@@ -182,13 +188,11 @@ export default function App() {
             className="w-full h-full object-cover opacity-90"
             style={{ objectPosition: 'center 20%' }}
           />
-          {/* Un dégradé sombre sur toute la surface pour garantir la lisibilité du texte blanc */}
           <div className="absolute inset-0 bg-black/50 z-10"></div>
         </div>
 
-        {/* Le contenu textuel, placé AU-DESSUS de l'image */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 relative z-20 w-full">
-          <div className="max-w-2xl"> {/* On limite la largeur du texte pour ne pas qu'il traverse tout l'écran */}
+          <div className="max-w-2xl">
             <div className="flex items-center gap-2 mb-4">
               <span className="font-bold text-xl tracking-tighter">Back Market</span>
               <span className="bg-white text-black text-xs font-bold px-2 py-0.5 rounded-sm">Séniors</span>
@@ -200,7 +204,7 @@ export default function App() {
               Des smartphones testés, garantis, et une assistance dédiée pour vous accompagner pas à pas.
             </p>
 
-            <button onClick={() => navigate('product')} className="bg-white text-black font-bold py-4 px-8 rounded-full hover:bg-slate-200 transition-colors text-lg">
+            <button onClick={() => navigate('product')} className="bg-white text-black font-bold py-4 px-8 rounded-full hover:bg-slate-200 transition-colors text-lg shadow-lg">
               En profiter
             </button>
           </div>
@@ -236,7 +240,7 @@ export default function App() {
             { name: "Photo", icon: Camera },
             { name: "Bons plans", icon: Tag },
           ].map((cat, idx) => {
-            const Icon = cat.icon; // Securisation du composant Icon
+            const Icon = cat.icon;
             return (
               <button 
                 key={idx} 
@@ -343,21 +347,15 @@ export default function App() {
         </div>
       </section>
 
-     {/* SECTION VIDÉOS DE RÉASSURANCE */}
+      {/* SECTION VIDÉOS DE RÉASSURANCE */}
       <section className="max-w-7xl mx-auto px-4 py-16">
         <h3 className="text-3xl font-black mb-8 text-center text-[#2A0054]">
           Achetez en toute sérénité : découvrez nos engagements
         </h3>
-        {/* Ajout de items-start pour que les cartes s'adaptent bien si les vidéos ont des formats différents */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
           
-          {/* Vidéo 3 (Achat sans stress) */}
           <div className="rounded-2xl overflow-hidden shadow-lg border border-slate-200 bg-white flex flex-col">
-            <video 
-              src="/video3.mp4" 
-              controls 
-              className="w-full h-auto bg-black"
-            ></video>
+            <video src="/video3.mp4" controls className="w-full h-auto bg-black"></video>
             <div className="p-6 flex-1">
               <h4 className="font-bold text-xl text-slate-900">Acheter en ligne sans stress</h4>
               <p className="text-slate-600 mt-2 leading-relaxed">
@@ -366,13 +364,8 @@ export default function App() {
             </div>
           </div>
 
-          {/* Vidéo 1 (Qu'est-ce que Back Market) */}
           <div className="rounded-2xl overflow-hidden shadow-lg border border-slate-200 bg-white flex flex-col">
-            <video 
-              src="/video1.mp4" 
-              controls 
-              className="w-full h-auto bg-black"
-            ></video>
+            <video src="/video1.mp4" controls className="w-full h-auto bg-black"></video>
             <div className="p-6 flex-1">
               <h4 className="font-bold text-xl text-slate-900">Le concept Back Market</h4>
               <p className="text-slate-600 mt-2 leading-relaxed">
@@ -381,13 +374,8 @@ export default function App() {
             </div>
           </div>
 
-          {/* Vidéo 2 (Garanties) */}
           <div className="rounded-2xl overflow-hidden shadow-lg border border-slate-200 bg-white flex flex-col">
-            <video 
-              src="/video2.mp4" 
-              controls 
-              className="w-full h-auto bg-black"
-            ></video>
+            <video src="/video2.mp4" controls className="w-full h-auto bg-black"></video>
             <div className="p-6 flex-1">
               <h4 className="font-bold text-xl text-slate-900">Nos garanties en détail</h4>
               <p className="text-slate-600 mt-2 leading-relaxed">
@@ -467,9 +455,9 @@ export default function App() {
                  <div><span className="font-bold block">Garantie 12 mois minimum</span><span className="text-sm text-slate-600">En cas de panne, on répare ou on remplace.</span></div>
                </div>
                {serenityMode && (
-                 <a href={`tel:${demoPhoneNumber}`} className="flex items-center gap-3 p-4 border border-blue-200 bg-blue-50 rounded-xl cursor-pointer hover:bg-blue-100">
-                   <Phone className="w-6 h-6 text-blue-600" />
-                   <div><span className="font-bold text-blue-900 block">Besoin d'aide pour commander ?</span><span className="text-sm text-blue-700">Appelez un conseiller gratuitement.</span></div>
+                 <a href={`tel:${telLink}`} className="flex items-center gap-3 p-4 border border-[#ccff00] bg-[#ccff00]/10 rounded-xl cursor-pointer hover:bg-[#ccff00]/20 transition-colors">
+                   <Phone className="w-6 h-6 text-black" />
+                   <div><span className="font-bold text-black block">Besoin d'aide pour commander ?</span><span className="text-sm text-slate-700">Appelez un conseiller gratuitement.</span></div>
                  </a>
                )}
             </div>
@@ -497,8 +485,8 @@ export default function App() {
             </div>
             <h2 className="text-xl font-bold mb-2">Parler de vive voix</h2>
             <p className="text-slate-600 text-sm mb-6">Un conseiller vous répond directement pour vous guider pas à pas.</p>
-            <a href={`tel:${demoPhoneNumber}`} className="inline-block w-full bg-black text-white font-bold py-3 rounded-full hover:bg-slate-800">
-              Appeler le conseiller
+            <a href={`tel:${telLink}`} className="inline-block w-full bg-black text-white font-bold py-3 rounded-full hover:bg-slate-800">
+              Appeler le {demoPhoneNumber}
             </a>
           </div>
           <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 text-center">
@@ -537,23 +525,51 @@ export default function App() {
 
   // --- CHATBOT FLOTTANT ---
   const Chatbot = () => {
-    if (!showChatbot) return null;
+    // Si la bulle est cachée, on affiche le bouton pour pouvoir la rouvrir !
+    if (!showChatbot) {
+      return (
+        <button 
+          onClick={() => setShowChatbot(true)}
+          className={`fixed bottom-6 right-6 z-50 ${serenityMode ? 'px-6 py-4 rounded-full' : 'w-16 h-16 rounded-full'} bg-black hover:bg-slate-800 text-white shadow-2xl flex items-center justify-center gap-3 transition-transform hover:scale-105 border-2 border-slate-700`}
+          aria-label="Ouvrir l'assistant"
+        >
+          <MessageCircle className="w-8 h-8 text-[#ccff00]" />
+          {serenityMode && <span className="font-bold text-xl text-white">Besoin d'aide ?</span>}
+        </button>
+      );
+    }
+    
+    // Si la bulle est ouverte, on affiche tout l'assistant
     return (
-      <div className="fixed bottom-24 right-6 z-40 w-80 bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col">
+      <div className="fixed bottom-6 right-6 z-50 w-80 sm:w-96 bg-white rounded-2xl shadow-2xl border-2 border-slate-200 overflow-hidden flex flex-col">
         <div className="bg-black text-white p-4 flex justify-between items-center">
-          <span className="font-bold flex items-center gap-2"><Headset className="w-5 h-5"/> Conseiller</span>
-          <button onClick={() => setShowChatbot(false)}><X className="w-5 h-5" /></button>
+          <span className="font-bold flex items-center gap-2"><Headset className="w-5 h-5 text-[#ccff00]"/> Conseiller Back Market</span>
+          <button onClick={() => setShowChatbot(false)} className="hover:bg-slate-800 p-1 rounded-full transition-colors"><X className="w-6 h-6 text-white" /></button>
         </div>
         <div className="p-4 bg-slate-50">
-          <p className="bg-white p-3 rounded-lg shadow-sm border border-slate-100 text-sm mb-4 font-medium">
-            Bonjour ! Vous avez besoin d'aide pour choisir ou vous préférez qu'on s'appelle ?
+          <p className="bg-white p-4 rounded-xl shadow-sm border border-slate-100 text-[15px] mb-4 font-medium text-slate-800">
+            {serenityMode 
+              ? "Bonjour ! Je suis là pour vous accompagner. Vous préférez chercher un appareil ou qu'on s'appelle directement ?" 
+              : "Bonjour ! Puis-je vous aider à choisir un appareil ?"}
           </p>
-          <a href={`tel:${demoPhoneNumber}`} className="w-full flex items-center justify-center gap-2 bg-black hover:bg-slate-800 text-white p-3 rounded-lg font-bold text-sm transition-colors mb-2">
-            <Phone className="w-4 h-4" /> M'appeler maintenant
-          </a>
-          <button onClick={() => navigate('assistance')} className="w-full bg-white border border-slate-300 font-bold p-3 rounded-lg text-sm hover:bg-slate-50">
-            Voir les tutoriels
-          </button>
+          
+          <div className="flex flex-col gap-2">
+            <button onClick={() => navigate('product')} className="w-full text-left p-3 bg-white border border-slate-200 hover:border-black hover:bg-slate-50 rounded-xl font-bold text-slate-800 transition-all">
+              Trouver un smartphone simple
+            </button>
+            <button className="w-full text-left p-3 bg-white border border-slate-200 hover:border-black hover:bg-slate-50 rounded-xl font-bold text-slate-800 transition-all">
+              Comprendre nos garanties
+            </button>
+            
+            <div className="mt-3 pt-3 border-t border-slate-200 flex flex-col gap-2">
+              <a href={`tel:${telLink}`} className="w-full flex items-center justify-center gap-2 bg-[#ccff00] hover:bg-[#bbf000] text-black p-4 rounded-xl font-black text-lg transition-colors shadow-sm">
+                <Phone className="w-5 h-5" /> {demoPhoneNumber}
+              </a>
+              <button onClick={() => navigate('assistance')} className="w-full flex items-center justify-center gap-2 bg-purple-100 hover:bg-purple-200 text-purple-900 font-bold p-3 rounded-xl transition-colors">
+                <Video className="w-5 h-5" /> Appeler en visio
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -577,23 +593,22 @@ export default function App() {
             <li><button onClick={() => navigate('assistance')} className="hover:underline text-blue-600 font-bold">Assistance Sénior</button></li>
             <li><button className="hover:underline">Suivre ma commande</button></li>
             <li><button className="hover:underline">Revendre mon appareil</button></li>
-            <li><button className="hover:underline">Nous contacter</button></li>
+            <li><button className="hover:underline">Nous contacter par e-mail</button></li>
           </ul>
         </div>
-        <div>
-          <h4 className="font-black text-black text-lg mb-4">Garanties</h4>
-          <ul className="space-y-3 font-medium">
-            <li><button className="hover:underline">Garantie 12 mois</button></li>
-            <li><button className="hover:underline">Retours sous 30 jours</button></li>
-            <li><button className="hover:underline">Paiement sécurisé</button></li>
-          </ul>
-        </div>
-        <div>
-          <h4 className="font-black text-black text-lg mb-4">Inscrivez-vous</h4>
-          <p className="mb-4">Recevez nos meilleures offres et astuces.</p>
-          <div className="flex border border-slate-300 rounded-lg overflow-hidden">
-            <input type="email" placeholder="E-mail" className="px-3 py-2 w-full outline-none" />
-            <button className="bg-black text-white px-4 font-bold">OK</button>
+        
+        {/* Nouveau : Le gros bouton Contact dans le Footer */}
+        <div className="md:col-span-2 bg-slate-50 p-6 rounded-2xl border border-slate-100">
+          <h4 className="font-black text-black text-lg mb-4">Contact direct</h4>
+          <p className="mb-4 text-slate-600 font-medium">Nos experts sont à votre écoute pour vous guider pas à pas dans votre choix.</p>
+          <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+            <a href={`tel:${telLink}`} className="inline-flex items-center justify-center gap-3 bg-[#ccff00] hover:bg-[#bbf000] text-black w-full sm:w-auto py-4 px-8 rounded-2xl shadow-sm transition-transform hover:scale-105">
+              <Phone className="w-6 h-6" />
+              <span className="text-xl font-black tracking-tight">{demoPhoneNumber}</span>
+            </a>
+            <span className="text-sm font-bold text-slate-500 flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-green-500" /> Appel gratuit 7j/7
+            </span>
           </div>
         </div>
       </div>

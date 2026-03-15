@@ -32,7 +32,8 @@ import {
   Check,
   Shield,
   Clock,
-  Heart
+  Heart,
+  MessageSquare // Ajout de l'import manquant
 } from 'lucide-react';
 
 // --- TYPES ---
